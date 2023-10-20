@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            @Html.ActionLink("Vehicle Rental System", "Index", "Home", new { area = "" })
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#"> @Html.ActionLink("Home", "Index", "Home") <span class="sr-only">(current)</span></a>
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <a class="nav-item nav-link" href="#">@Html.ActionLink("Bookings", "Bookings", "VehicleBookings")</a>
+
+                }
+                else if (User.Identity.IsAuthenticated && User.IsInRole("User"))
+                {
+                    <a class="nav-item nav-link" href="#">@Html.ActionLink("My Bookings", "MyBookings", "VehicleBookings")</a>
+
+                }
+                <a class="nav-item nav-link" href="#">@Html.ActionLink("Vehicles Availability", "Search", "VehicleAvailabilities")</a>
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <a class="nav-item nav-link" href="#">@Html.ActionLink("Users", "Index", "Users")</a>
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="nav-item nav-link" href="#">@Html.ActionLink("Logout", "Logout", "Home")</a>
+                }
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Vehicle Rental System</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

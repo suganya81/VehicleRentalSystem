@@ -1,0 +1,72 @@
+﻿@model IEnumerable<VehicleRentalSystem.Models.VehicleBooking>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All Bookings</h2>
+
+<div class="card border-secondary mb-3">
+
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vehicle.Name)
+                </th>
+                <th>
+                    Booked On
+                </th>
+                <th>
+                    Booked By User
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AdvancePaid)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Total)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PaymentMode)
+                </th>
+                <th>
+                    Booked From Date
+                </th>
+                <th>
+                    Booked To Date
+                </th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Vehicle.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedAt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AdvancePaid)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Total)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PaymentMode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VehicleAvailability.FromDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VehicleAvailability.ToDate)
+                    </td>
+                </tr>
+            }
+
+    </table>
+</div>

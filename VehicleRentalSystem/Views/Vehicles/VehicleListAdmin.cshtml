@@ -1,0 +1,89 @@
+﻿@model IEnumerable<VehicleRentalSystem.Models.Vehicle>
+
+@{
+    ViewBag.Title = "VehicleListAdmin";
+}
+
+<h2>Vehicle List</h2>
+
+<div class="btn btn-light">
+    @Html.ActionLink("Add New", "Create")
+</div>
+<div class="table-responsive">
+    <br /><br />
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegistrationNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegistrationYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Colour)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Details)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tariff)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegistrationNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegistrationYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Brand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Colour)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Details)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tariff)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+
+                    <div class="btn btn-outline-primary btn-sm">
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                    </div>
+                    <div class="btn btn-outline-warning btn-sm">
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </table>
+    </div>

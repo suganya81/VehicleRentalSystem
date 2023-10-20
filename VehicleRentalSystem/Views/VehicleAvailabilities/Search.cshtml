@@ -1,0 +1,93 @@
+﻿@model VehicleRentalSystem.Models.VehicleBookingDto
+
+@{
+    ViewBag.Title = "Search Vehicle Availability";
+}
+
+<div>
+    <div class="row">
+        <div class="col-sm-12 btn btn-success">
+            Search Vehicles
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div class="container">
+    @using (Html.BeginForm("Search", "VehicleAvailabilities", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row blockquote">
+            <i>Enter from and to dates and click on search to find the list of cars available on those days to book.</i>
+        </div>
+        <div class="row">
+            <div><label>From Date</label></div>
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.StartDate, new { @type = "date", @class = "form-control datepicker", @Value = Model.StartDate.ToString("yyyy-MM-dd") })
+                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+            </div>
+            <div><label>To Date</label></div>
+            <div class="col-md-3">
+                @Html.TextBoxFor(model => model.EndDate, new { @type = "date", @class = "form-control datepicker", @Value = Model.EndDate.ToString("yyyy-MM-dd") })
+                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-2">
+                <input type="submit" value="Search" class="btn btn-primary form-control" />
+            </div>
+        </div>
+        @Html.HiddenFor(a => a.VehicleId)
+        @Html.HiddenFor(a => a.Vehicles)
+       
+        <br /><br />
+        <div>
+            @if (Model.Vehicles.ToList().Count() == 0)
+            {
+                <h2>Vehicle not available for the given dates</h2>
+            }
+            else
+            {
+
+                <div class="row">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th style="width:33%">
+                                @Html.DisplayNameFor(model => model.Vehicles[0].Name)
+                            </th>
+                            <th style="width:33%">
+                                @Html.DisplayNameFor(model => model.Vehicles[0].Model)
+                            </th>
+                            <th style="width:33%">
+                                @Html.DisplayNameFor(model => model.Vehicles[0].Tariff)
+                            </th>
+                            @*<th></th>*@
+                        </tr>
+                        @foreach (var item in Model.Vehicles.ToList())
+                        {
+
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Model)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Tariff)
+                                </td>
+                                <td>
+                                    <input type="hidden" id="vehicleId" name="vehicleId" value="@item.Id" />
+
+                                    <input type="submit" id="bookBtn" value="Book" formaction="DoBooking" />
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            }
+        </div>
+    }
+    @Html.ActionLink("Back to Search list", "Index", "Vehicles")
+</div>
+
+

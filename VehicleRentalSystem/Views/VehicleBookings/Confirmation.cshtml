@@ -1,0 +1,20 @@
+﻿@model string
+@{
+    ViewBag.Title = "Confirmation";
+}
+
+<h2>Confirmation</h2>
+
+<div class="card">
+    <div class="card-header">
+        Hurray!
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Booking done!</h5>
+        <p class="card-text">Congrats! Your booking is confirmed. Your PNR number for booking is : @Model. </p>
+        <div class="btn btn-success">
+            @Html.ActionLink("Go to MyBookings", "MyBookings", "VehicleBookings")
+        </div>
+    </div>
+</div>
+
